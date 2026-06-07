@@ -535,7 +535,7 @@ h1, h2, h3, h4, h5, h6 {
 .restaurant-details-container {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: auto;
 }
 
 .restaurant-header {
@@ -672,3 +672,547 @@ h1, h2, h3, h4, h5, h6 {
 .location-warning button:hover {
   opacity: 1;
 }
+
+/* ============================================================
+   HOTEL CARD WITH IMAGE
+   ============================================================ */
+.hotel-card {
+  overflow: hidden;
+  padding: 0 !important;
+}
+.hotel-card-image {
+  width: 100%;
+  height: 140px;
+  overflow: hidden;
+}
+.hotel-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.hotel-card:hover .hotel-card-image img {
+  transform: scale(1.05);
+}
+.hotel-card-body {
+  padding: 14px 16px;
+}
+.info-card.clickable:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Hotel Details View */
+.hotel-details-container {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+.hotel-header {
+  padding: 10px 30px 10px;
+}
+.hotel-header h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+.hotel-badges {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.hotel-price-range {
+  color: #10b981;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+.hotel-hero-image {
+  padding: 0 30px 20px;
+}
+.hotel-hero-image img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* Amenities Grid */
+.amenities-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.amenity-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* Room Type Cards */
+.rooms-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.room-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background: var(--item-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+.room-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+.room-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.room-type {
+  font-weight: 600;
+  font-size: 1rem;
+}
+.room-features {
+  display: flex;
+  gap: 6px;
+}
+.room-tag {
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.room-tag.best-value {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+}
+.room-tag.premium {
+  background: rgba(168, 85, 247, 0.15);
+  color: #a855f7;
+}
+.room-price {
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: #10b981;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   NEARBY HIGHLIGHTS — ENHANCED
+   ============================================================ */
+.nearby-gallery {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  scroll-snap-type: x mandatory;
+}
+.nearby-card {
+  width: 180px;
+  height: 130px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  scroll-snap-align: start;
+  border: 1px solid var(--glass-border);
+  transition: transform 0.2s ease;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.75), rgba(15, 23, 42, 0.95));
+}
+.nearby-card.no-image {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.nearby-card.no-image .nearby-card-content {
+  position: relative;
+  background: transparent;
+  padding: 14px;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.nearby-card.no-image .nearby-card-content h5 {
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+.nearby-card.no-image .nearby-card-content span {
+  font-size: 0.75rem;
+}
+.nearby-card.no-image .nearby-distance {
+  margin-top: 6px;
+  margin-left: 0;
+}
+.nearby-card:hover {
+  transform: translateY(-3px);
+}
+.nearby-card img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+}
+.nearby-card-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+}
+.nearby-card-content h5 {
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+.nearby-card-content span {
+  font-size: 0.72rem;
+  color: #94a3b8;
+}
+.nearby-distance {
+  display: inline-block;
+  margin-left: 6px;
+  background: rgba(59, 130, 246, 0.2);
+  color: #60a5fa;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.68rem !important;
+  font-weight: 500;
+}
+
+/* ============================================================
+   TRAVEL SEARCH
+   ============================================================ */
+.travel-search-container {
+  margin-top: 4px;
+}
+.travel-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.travel-tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 8px;
+  border-radius: 10px;
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.travel-tab:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+}
+.travel-tab.active {
+  background: var(--accent-color);
+  border-color: var(--accent-hover);
+  color: white;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.travel-no-location {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 24px 16px;
+  text-align: center;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+}
+.travel-no-location p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.travel-unavailable {
+  padding: 16px;
+  background: rgba(250, 204, 21, 0.08);
+  border: 1px solid rgba(250, 204, 21, 0.2);
+  border-radius: 12px;
+  color: #fbbf24;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.travel-results {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.travel-airport-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.15);
+  border-radius: 10px;
+  font-size: 0.85rem;
+  color: #93c5fd;
+}
+
+.travel-distance-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+}
+
+/* Fare Cards */
+.fare-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.fare-card {
+  padding: 14px;
+  background: var(--item-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  position: relative;
+  transition: all 0.2s ease;
+}
+.fare-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+.fare-card.best-value {
+  border-color: rgba(16, 185, 129, 0.3);
+  background: rgba(16, 185, 129, 0.04);
+}
+.fare-tag {
+  position: absolute;
+  top: -1px;
+  right: 12px;
+  background: #10b981;
+  color: white;
+  padding: 2px 10px;
+  border-radius: 0 0 6px 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.fare-class {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 6px;
+  color: var(--text-primary);
+}
+.fare-price {
+  font-size: 1.3rem;
+  font-weight: 700;
+  font-family: var(--font-heading);
+  color: #10b981;
+  margin-bottom: 8px;
+}
+.fare-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+.fare-meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.fare-airlines {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.airline-chip {
+  font-size: 0.75rem;
+  padding: 3px 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  color: var(--text-secondary);
+}
+
+/* Location Selection Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(8px);
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.modal-content {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 32px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 480px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  animation: scaleUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.5rem;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.modal-close:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+}
+
+.modal-content h3 {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+  background: linear-gradient(to right, #fff, #94a3b8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.modal-content p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.location-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.modal-input:focus {
+  border-color: var(--accent-color);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.modal-btn {
+  flex: 1;
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.modal-btn-primary {
+  background: var(--accent-color);
+  color: white;
+}
+
+.modal-btn-primary:hover {
+  background: var(--accent-hover);
+}
+
+.modal-btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+}
+
+.modal-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.modal-error {
+  color: #ef4444;
+  font-size: 0.88rem;
+  margin-bottom: 16px;
+  text-align: left;
+  padding-left: 4px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+

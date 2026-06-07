@@ -2,13 +2,28 @@ import React, { useState, useEffect } from 'react';
 import { Plane, Train, Bus, MapPin, Star, Building, Coffee, Bike, ChevronLeft, ArrowRight, Route, TrainTrack, Compass, Navigation } from 'lucide-react';
 import WeatherWidget from './WeatherWidget';
 import RestaurantDetails from './RestaurantDetails';
+import HotelDetails from './HotelDetails';
+import TravelSearch from './TravelSearch';
 
-const Sidebar = ({ selectedPlace, onSelectPlace, travelMode, setTravelMode, places }) => {
+const Sidebar = ({ selectedPlace, onSelectPlace, travelMode, setTravelMode, places, userLocation }) => {
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
+  const [selectedHotel, setSelectedHotel] = useState(null);
 
   useEffect(() => {
     setSelectedRestaurant(null);
+    setSelectedHotel(null);
   }, [selectedPlace]);
+
+  if (selectedHotel) {
+    return (
+      <div className="sidebar-container glass-panel">
+        <HotelDetails 
+          hotel={selectedHotel} 
+          onBack={() => setSelectedHotel(null)} 
+        />
+      </div>
+    );
+  }
 
   if (selectedRestaurant) {
     return (
@@ -60,17 +75,25 @@ const Sidebar = ({ selectedPlace, onSelectPlace, travelMode, setTravelMode, plac
           ))}
         </div>
 
-        {/* Nearby Attractions Phase 2 */}
+        {/* Nearby Attractions */}
         {selectedPlace.nearby && selectedPlace.nearby.length > 0 && (
           <div className="section divider-top">
             <h3><Compass size={20} /> Nearby Highlights</h3>
             <div className="nearby-gallery">
               {selectedPlace.nearby.map((item, idx) => (
                 <div key={idx} className="nearby-card">
-                  <img src={item.image} alt={item.name} />
+                  <img 
+                    src={item.image} 
+                    alt={item.name} 
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.parentNode.classList.add('no-image');
+                    }}
+                  />
                   <div className="nearby-card-content">
                     <h5>{item.name}</h5>
                     <span>{item.type}</span>
+                    {item.distance && <span className="nearby-distance">{item.distance}</span>}
                   </div>
                 </div>
               ))}
@@ -78,42 +101,44 @@ const Sidebar = ({ selectedPlace, onSelectPlace, travelMode, setTravelMode, plac
           </div>
         )}
 
+        {/* Travel Search - replaces static reachability */}
         <div className="section divider-top">
           <h3><Plane size={20} /> How to Reach</h3>
-          <div className="card-list">
-            {selectedPlace.reachability.map((method, idx) => (
-              <div key={idx} className="info-card">
-                <div className="card-header">
-                  <span className="method-name">{method.mode}</span>
-                  <span className="method-price">{method.price}</span>
-                </div>
-                <div className="card-body">
-                  <p className="duration">{method.duration}</p>
-                  <p className="details">{method.details}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <TravelSearch place={selectedPlace} userLocation={userLocation} />
         </div>
 
+        {/* Hotels - now clickable with images */}
         <div className="section divider-top">
           <h3><Building size={20} /> Top Stays</h3>
           <div className="card-list">
             {selectedPlace.amenities.hotels.map((hotel, idx) => (
-              <div key={idx} className="info-card">
-                <div className="card-header">
-                  <span className="item-name">{hotel.name}</span>
-                  <div className="rating"><Star size={14} fill="currentColor"/> {hotel.rating}</div>
-                </div>
-                <div className="card-body type-price">
-                  <span className="badge">{hotel.type}</span>
-                  <span className="price">{hotel.price}</span>
+              <div 
+                key={idx} 
+                className="info-card hotel-card clickable" 
+                onClick={() => setSelectedHotel(hotel)}
+                style={{ cursor: 'pointer' }}
+              >
+                {hotel.image && (
+                  <div className="hotel-card-image">
+                    <img src={hotel.image} alt={hotel.name} />
+                  </div>
+                )}
+                <div className="hotel-card-body">
+                  <div className="card-header">
+                    <span className="item-name">{hotel.name}</span>
+                    <div className="rating"><Star size={14} fill="currentColor"/> {hotel.rating}</div>
+                  </div>
+                  <div className="card-body type-price">
+                    <span className="badge">{hotel.type}</span>
+                    <span className="price">{hotel.priceRange || hotel.price}</span>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
+        {/* Restaurants */}
         <div className="section divider-top">
           <h3><Coffee size={20} /> Where to Eat</h3>
           <div className="card-list">
@@ -137,7 +162,7 @@ const Sidebar = ({ selectedPlace, onSelectPlace, travelMode, setTravelMode, plac
           </div>
         </div>
 
-        {/* Reviews Section Phase 2 */}
+        {/* Reviews Section */}
         {selectedPlace.reviews && (
           <div className="section divider-top">
             <h3><Star size={20} /> Traveler Reviews</h3>
